@@ -27,6 +27,14 @@ var Game = React.createClass({
 		var randomDie = [randImgOne, randImgTwo];
 		return { data: randomDie };
 	},
+	rollDice: function() {
+		let randIntOne = 1 + Math.floor(Math.random() * 6);
+		let randImgOne = "images/dice/0" + randIntOne + ".gif";
+		let randIntTwo = 1 + Math.floor(Math.random() * 6);
+		let randImgTwo = "images/dice/0" + randIntTwo + ".gif";
+		var randomDie = [randImgOne, randImgTwo];
+		this.setState({ data: randomDie });
+	},
 	render: function() {
 		return (
 			<div>
@@ -35,6 +43,7 @@ var Game = React.createClass({
 					<Die data={this.state.data[0]} />
 					<Die data={this.state.data[1]} />
 				</div>
+				<button onClick={this.rollDice}>Roll Dice</button>
 			</div>
 		);
 	}
