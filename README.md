@@ -8,5 +8,7 @@ The *Fight the Dragon* game ported to React.js.
 ![screenshot](http://i63.tinypic.com/vema1i.png)
 
 ## Getting Started
-```npm install```
-```http://localhost:8080```
+```shell
+npm install
+```
+Go to http://localhost:8080
