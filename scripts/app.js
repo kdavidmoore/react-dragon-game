@@ -1,8 +1,8 @@
-var Dragon = React.createClass({
+var ActionImage = React.createClass({
 	render: function() {
 		return (
-			<div>
-				<img src="images/dragon2.jpg" />
+			<div className="actionWrapper">
+				<img className="actionImg" src={this.props.imgSrc} />
 			</div>
 		);
 	}
@@ -22,16 +22,17 @@ var Status = React.createClass({
 	render: function() {
 		return (
 			<div>
-				{ this.props.data ? null : <h4>You fought valiantly but were burnt to a crisp.</h4> }
-				{ this.props.data ? <h4>You slew the dragon and lived to tell the tale!</h4> : null }
+				{ this.props.data == "virgin" ? <h5>You have encountered a dragon. Roll the dice to continue.</h5> : null }
+				{ this.props.data == "dead" ? <h5>You fought valiantly but were burnt to a crisp.</h5> : null }
+				{ this.props.data == "alive" ? <h5>You slew the dragon and lived to tell the tale!</h5> : null }
 			</div>
-		)
+		);
 	}
 })
 
 var Game = React.createClass({
 	getInitialState: function() {
-		return { data: [], alive: true };
+		return { data: [], yourHealth: "virgin", imgSrc: "images/dragon.jpg" };
 	},
 	rollDice: function() {
 		let randIntOne = 1 + Math.floor(Math.random() * 6);
@@ -40,22 +41,31 @@ var Game = React.createClass({
 		let randImgTwo = "images/dice/0" + randIntTwo + ".gif";
 		let randomDie = [randImgOne, randImgTwo];
 		let score = randIntOne + randIntTwo;
-		let alive = true;
+		let yourHealth = "";
+		let imageToShow = "";
 		if (score < 9) {
-				alive = false;
+			yourHealth = "dead";
+			imageToShow = "images/checkmate.jpg";
+		} else {
+			yourHealth = "alive";
+			imageToShow = "images/victory.jpg";
 		}
-		this.setState({ data: randomDie, alive: alive });
+		this.setState({ data: randomDie, yourHealth: yourHealth, imgSrc: imageToShow });
 	},
 	render: function() {
 		return (
-			<div>
-				<Dragon />
-				<div className="dieWrapper">
-					<Die data={this.state.data[0]} />
-					<Die data={this.state.data[1]} />
+			<div className="row">
+				<div className="three columns filler"></div>
+				<div className="six columns gameWrapper">
+					<ActionImage imgSrc={this.state.imgSrc} />
+					<div className="dieWrapper">
+						<Die data={this.state.data[0]} />
+						<Die data={this.state.data[1]} />
+					</div>
+					<button onClick={this.rollDice}>Roll Dice</button>
+					<Status data={this.state.yourHealth} />
 				</div>
-				<button onClick={this.rollDice}>Roll Dice</button>
-				<Status data={this.state.alive} />
+				<div className="three columns filler"></div>
 			</div>
 		);
 	}

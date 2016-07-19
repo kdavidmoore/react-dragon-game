@@ -1,3 +1,31 @@
 * {
 	box-sizing: border-box;
+	/*color: white;*/
+}
+/*body {
+	background-color: black;
+}*/
+.gameWrapper {
+	text-align: center;
+}
+.actionWrapper {
+	width: 100%;
+}
+.actionImg {
+	max-width: 100%;
+	border-radius: 5px;
+}
+.dieWrapper {
+	padding: 10px;
+}
+.dieWrapper > * {
+	display: inline;
+}
+.filler {
+	min-height: 1px;
+}
+@media screen and (max-width: 768px) {
+  .filler {
+		display: none;
+	}
 }
