@@ -32,7 +32,11 @@ var Status = React.createClass({
 
 var Game = React.createClass({
 	getInitialState: function() {
-		return { data: [], yourHealth: "virgin", imgSrc: "images/dragon.jpg" };
+		return {
+			data: [],
+			yourHealth: "virgin",
+			imgSrc: "images/dragon.jpg"
+		};
 	},
 	rollDice: function() {
 		let randIntOne = 1 + Math.floor(Math.random() * 6);
@@ -50,7 +54,11 @@ var Game = React.createClass({
 			yourHealth = "alive";
 			imageToShow = "images/victory.jpg";
 		}
-		this.setState({ data: randomDie, yourHealth: yourHealth, imgSrc: imageToShow });
+		this.setState({
+			data: randomDie,
+			yourHealth: yourHealth,
+			imgSrc: imageToShow
+		});
 	},
 	render: function() {
 		return (
